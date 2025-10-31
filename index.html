@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baraka Lounge - L'Art de Vivre à l'État Pur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link type="image/png" sizes="16x16" rel="icon" href="favicon.png"> 
+    <link type="image/png" sizes="32x32" rel="icon" href="favicon32.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: 0 0% 5%;
+            --foreground: 45 100% 85%;
+            --card: 0 0% 8%;
+            --primary: 45 100% 51%;
+            --secondary: 0 0% 15%;
+            --accent: 45 95% 60%;
+            --border: 45 50% 25%;
+            --radius: 0.75rem;
+            --gradient-gold: linear-gradient(135deg, hsl(45 100% 51%) 0%, hsl(40 95% 45%) 100%);
+            --gradient-overlay: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+            --shadow-elegant: 0 4px 20px rgba(0, 0, 0, 0.6);
+            --shadow-gold: 0 10px 40px -10px hsl(45 100% 51% / 0.4);
+            --shadow-gold-lg: 0 20px 60px -15px hsl(45 100% 51% / 0.5);
+            --transition-elegant: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition-elegant);
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-elegant);
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-circle {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: hsl(var(--background));
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo-image {
+            width: 4.5rem;
+            height: 4.5rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid hsl(var(--primary));
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: hsl(var(--primary));
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: hsl(var(--foreground));
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-elegant);
+            opacity: 0.8;
+        }
+
+        .nav-link:hover {
+            opacity: 1;
+            color: hsl(var(--primary));
+        }
+
+        .btn-reserve {
+            background: var(--gradient-gold);
+            color: hsl(var(--background));
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-elegant);
+        }
+
+        .btn-reserve:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-gold-lg);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: hsl(var(--foreground));
+            margin: 2px 0;
+            transition: var(--transition-elegant);
+        }
+
+        /* Le reste du CSS reste inchangé */
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: heroZoom 20s ease-in-out infinite alternate;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-overlay);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 1rem;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: hsl(var(--primary));
+        }
+
+        .glow-gold {
+            text-shadow: 0 0 20px hsla(45, 100%, 51%, 0.4);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-elegant);
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-gold);
+            color: hsl(var(--background));
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-gold-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: hsl(var(--foreground));
+            border: 2px solid hsl(var(--primary));
+        }
+
+        .btn-outline:hover {
+            background: hsl(var(--primary));
+            color: hsl(var(--background));
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .mouse {
+            width: 24px;
+            height: 40px;
+            border: 2px solid hsl(var(--foreground));
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .wheel {
+            width: 4px;
+            height: 8px;
+            background-color: hsl(var(--foreground));
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll 2s infinite;
+        }
+
+        /* Sections communes */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            color: hsl(var(--primary));
+        }
+
+        .separator {
+            width: 6rem;
+            height: 2px;
+            margin: 1.5rem auto;
+            background: var(--gradient-gold);
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .opening-hours {
+            font-style: italic;
+            color: hsl(var(--primary));
+            font-weight: 500;
+        }
+
+        /* Section Restaurant */
+        .restaurant {
+            background-color: hsl(var(--card));
+        }
+
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .dish-card {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-elegant);
+            transition: var(--transition-elegant);
+            border: 2px solid hsl(var(--primary));
+        }
+
+        .dish-image-wrapper {
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .dish-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-elegant);
+        }
+
+        .dish-card:hover .dish-image {
+            transform: scale(1.1);
+        }
+
+        .dish-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-overlay);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: var(--transition-elegant);
+        }
+
+        .dish-card:hover .dish-overlay {
+            opacity: 1;
+        }
+
+        .dish-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--primary));
+        }
+
+        .philosophy-card {
+            background: hsla(var(--card), 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid hsl(var(--border));
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .philosophy-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: hsl(var(--primary));
+        }
+
+        /* Section Bar */
+        .bar {
+            background-color: hsl(var(--background));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-effects {
+            position: absolute;
+            inset: 0;
+            opacity: 0.2;
+        }
+
+        .glow {
+            position: absolute;
+            width: 24rem;
+            height: 24rem;
+            border-radius: 50%;
+            filter: blur(120px);
+        }
+
+        .glow-1 {
+            top: 25%;
+            left: 25%;
+            background: hsla(var(--primary), 0.3);
+        }
+
+        .glow-2 {
+            bottom: 25%;
+            right: 25%;
+            background: hsla(var(--accent), 0.3);
+        }
+
+        .cocktails-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .cocktail-card {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-gold);
+            border: 2px solid hsl(var(--primary));
+        }
+
+        .cocktail-image-wrapper {
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .cocktail-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-elegant);
+        }
+
+        .cocktail-card:hover .cocktail-image {
+            transform: scale(1.1);
+        }
+
+        .cocktail-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-overlay);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: var(--transition-elegant);
+        }
+
+        .cocktail-card:hover .cocktail-overlay {
+            opacity: 1;
+        }
+
+        .cocktail-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--primary));
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: hsla(var(--card), 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid hsl(var(--border));
+            transition: var(--transition-elegant);
+        }
+
+        .feature-card:hover {
+            border-color: hsl(var(--primary));
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--primary));
+        }
+
+        /* Section Chambres */
+        .chambres {
+            background-color: hsl(var(--card));
+        }
+
+        .room-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .room-image {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-gold-lg);
+            border: 2px solid hsl(var(--primary));
+            aspect-ratio: 16/9;
+        }
+
+        .room-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .amenities-border, .details-border {
+            background-color: hsl(0 0% 15%);
+            border: 2px solid hsl(var(--primary));
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .amenities-border h3, .details-border h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: hsl(var(--primary));
+        }
+
+        .amenities-border ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .amenities-border li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .details-border p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Section VIP */
+        .vip {
+            background-color: hsl(var(--background));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vip-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .vip-image {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-gold-lg);
+            border: 2px solid hsl(var(--primary));
+            aspect-ratio: 16/9;
+        }
+
+        .vip-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .service-card {
+            background: hsla(var(--card), 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid hsl(var(--border));
+            transition: var(--transition-elegant);
+        }
+
+        .service-card:hover {
+            border-color: hsl(var(--primary));
+            transform: translateY(-4px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--primary));
+        }
+
+        .cta-box {
+            background-color: hsl(var(--background));
+            box-shadow: var(--shadow-gold-lg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: hsl(var(--primary));
+        }
+
+        .cta-box p {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-box button {
+            background: var(--gradient-gold);
+            color: hsl(var(--background));
+        }
+
+        /* Section Galerie */
+        .gallery {
+            background-color: hsl(var(--card));
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .gallery-card {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-elegant);
+            border: 2px solid hsl(var(--primary));
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-elegant);
+        }
+
+        .gallery-card:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-card.view-more {
+            background: var(--gradient-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: hsl(var(--background));
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .gallery-card.view-more:hover {
+            transform: scale(1.05);
+        }
+
+        /* Carousel Modal */
+        .carousel-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .carousel-modal.active {
+            display: flex;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .carousel-item {
+            flex: 0 0 100%;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: var(--radius);
+            border: 2px solid hsl(var(--primary));
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gradient-gold);
+            color: hsl(var(--background));
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: var(--transition-elegant);
+        }
+
+        .carousel-nav:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-prev {
+            left: 1rem;
+        }
+
+        .carousel-next {
+            right: 1rem;
+        }
+
+        .carousel-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gradient-gold);
+            color: hsl(var(--background));
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            z-index: 2100;
+            font-weight: 600;
+        }
+
+        .carousel-counter {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: hsl(var(--foreground));
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            z-index: 2100;
+        }
+
+        /* Section Reservation */
+        .reservation {
+            background-color: hsl(var(--card));
+            padding: 6rem 0;
+        }
+
+        .reservation-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: hsla(var(--secondary), 0.5);
+            border-radius: var(--radius);
+            border: 1px solid hsl(var(--border));
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: hsl(var(--foreground));
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 1rem;
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: hsl(var(--primary));
+            outline: none;
+        }
+
+        .info-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .info-box {
+            background-color: hsl(0 0% 15%);
+            border: 2px solid hsl(var(--primary));
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .info-box h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--primary));
+        }
+
+        .info-box p, .info-box a {
+            font-size: 1rem;
+            color: hsl(var(--foreground));
+            text-decoration: none;
+            opacity: 0.9;
+        }
+
+        .info-box a:hover {
+            color: hsl(var(--primary));
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: hsl(var(--secondary));
+            padding: 3rem 0;
+            color: hsl(var(--foreground));
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: hsl(var(--primary));
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: hsl(var(--foreground));
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition-elegant);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: hsl(var(--primary));
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid hsl(var(--border));
+            opacity: 0.7;
+            font-size: 0.875rem;
+        }
+
+        /* Animations */
+        @keyframes heroZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        @keyframes scroll {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(10px); opacity: 0; }
+        }
+
+        .animate-fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            transform: translateY(20px);
+        }
+
+        .animate-slide-up {
+            opacity: 0;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            transform: translateY(40px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: hsl(var(--background));
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.5rem, 8vw, 4rem);
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .dishes-grid,
+            .cocktails-grid,
+            .features-grid,
+            .services-grid,
+            .room-showcase,
+            .vip-showcase,
+            .gallery-grid,
+            .info-boxes {
+                grid-template-columns: 1fr;
+            }
+
+            .vip-image {
+                height: 300px;
+            }
+
+            .carousel-container {
+                height: 60vh;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <img src="logo.png" alt="Baraka Lounge" class="logo-image">
+                <span class="brand-name">YaBass Lounge</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Accueil</a>
+                <a href="#restaurant" class="nav-link">Restaurant</a>
+                <a href="#bar" class="nav-link">Bar</a>
+                <a href="#vip" class="nav-link">Salon VIP</a>
+                <a href="#gallery" class="nav-link">Galerie</a>
+                <a href="#reservation" class="nav-link"><button class="btn-reserve">Réservation</a></button>
+            </div>
+            <button class="menu-toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Le reste du code HTML reste exactement le même -->
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <img src="1.jpg"alt="Terrasse Baraka Lounge" class="hero-image">
+            <div class="gradient-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="glow-gold">Yabass Lounge</h1>
+            <p class="hero-subtitle">L'Art de Vivre à l'État Pur</p>
+            <p class="hero-description"> Restaurant gastronomique • Bar d'exception • Salon VIP</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary"><a href="#reservation" class="nav-link" style="color: black;"><h3>Réserver Maintenant</h3></a></button>
+                <button class="btn btn-outline"><a href="#gallery" class="nav-link" style="color: black;"><h3>Découvrir</h3></a></button>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Restaurant -->
+    <section id="restaurant" class="section restaurant">
+        <div class="container">
+            <header class="section-header animate-fade-in">
+                <h2 class="section-title glow-gold">Restaurant</h2>
+                <div class="separator"></div>
+                <p class="section-description">
+                    Une expérience gastronomique unique où chaque plat est une œuvre d'art. 
+                    Notre chef et son équipe vous proposent une cuisine raffinée alliant tradition et modernité.
+                </p>
+                <p class="opening-hours">Ouvert 7J/7 de 8h à 23h</p>
+            </header>
+            <div class="dishes-grid">
+                <div class="dish-card animate-slide-up">
+                    <div class="dish-image-wrapper">
+                        <img src="REST1.jpg" alt="Cuisine Gastronomique" class="dish-image">
+                        <div class="dish-overlay">
+                            <h3>Cuisine Gastronomique</h3>
+                            <p>Des plats raffinés préparés par nos chefs étoilés</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-card animate-slide-up" style="animation-delay: 0.2s;">
+                    <div class="dish-image-wrapper">
+                        <img src="REST2.jpg" alt="Viandes d'Exception" class="dish-image">
+                        <div class="dish-overlay">
+                            <h3>Viandes d'Exception</h3>
+                            <p>Sélection premium de viandes grillées à la perfection</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-card animate-slide-up" style="animation-delay: 0.4s;">
+                    <div class="dish-image-wrapper">
+                        <img src="REST3.jpg" alt="Pâtes Artisanales" class="dish-image">
+                        <div class="dish-overlay">
+                            <h3>Pâtes Artisanales</h3>
+                            <p>Faites maison avec des ingrédients frais</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-card animate-slide-up" style="animation-delay: 0.6s;">
+                    <div class="dish-image-wrapper">
+                        <img src="REST4.jpg" alt="Desserts d'Exception" class="dish-image">
+                        <div class="dish-overlay">
+                            <h3>Desserts d'Exception</h3>
+                            <p>Douceurs sucrées pour finir en beauté</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="philosophy-card animate-fade-in">
+                <h3>Notre Philosophie</h3>
+                <p>
+                    Produits frais et de saison, techniques culinaires innovantes, 
+                    et présentation soignée pour une expérience gastronomique inoubliable.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Bar -->
+    <section id="bar" class="section bar">
+        <div class="glow-effects">
+            <div class="glow glow-1"></div>
+            <div class="glow glow-2"></div>
+        </div>
+        <div class="container">
+            <header class="section-header animate-fade-in">
+                <h2 class="section-title glow-gold">Bar</h2>
+                <div class="separator"></div>
+                <p class="section-description">
+                    Découvrez notre sélection exclusive de cocktails signatures, 
+                    spiritueux premium et champagnes d'exception dans une ambiance élégante et festive.
+                </p>
+            </header>
+            <div class="cocktails-grid">
+                <div class="cocktail-card animate-slide-up" style="animation-delay: 0.2s;">
+                    <div class="cocktail-image-wrapper">
+                        <img src="BAR1.jpg" alt="Golden Elixir" class="cocktail-image">
+                        <div class="cocktail-overlay">
+                            <h3>Golden Elixir</h3>
+                            <p>Notre cocktail signature aux reflets dorés</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cocktail-card animate-slide-up" style="animation-delay: 0.2s;">
+                    <div class="cocktail-image-wrapper">
+                        <img src="BAR2.jpg" alt="Champagne Royal" class="cocktail-image">
+                        <div class="cocktail-overlay">
+                            <h3>Champagne Royal</h3>
+                            <p>Bulles fines et saveurs raffinées</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cocktail-card animate-slide-up" style="animation-delay: 0.4s;">
+                    <div class="cocktail-image-wrapper">
+                        <img src="BAR3.jpg" alt="Espresso Martini" class="cocktail-image">
+                        <div class="cocktail-overlay">
+                            <h3>Espresso Martini</h3>
+                            <p>Un mélange audacieux de café et de vodka</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cocktail-card animate-slide-up" style="animation-delay: 0.6s;">
+                    <div class="cocktail-image-wrapper">
+                        <img src="BAR4.jpg" alt="Margarita Royale" class="cocktail-image">
+                        <div class="cocktail-overlay">
+                            <h3>Le --Bar--</h3>
+                            <p>Fraîcheur et zeste de citron vert</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🍸</div>
+                    <h3>Cocktails Signatures</h3>
+                    <p>Créations originales de nos mixologues</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥃</div>
+                    <h3>Spiritueux Premium</h3>
+                    <p>Whiskies, rhums et cognacs d'exception</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🍾</div>
+                    <h3>Champagnes</h3>
+                    <p>Sélection de grandes maisons</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Section VIP -->
+    <section id="vip" class="section vip">
+        <div class="container">
+            <header class="section-header animate-fade-in">
+                <h2 class="section-title glow-gold">Salon VIP</h2>
+                <div class="separator"></div>
+                <p class="section-description">
+                    Un espace exclusif réservé à notre clientèle la plus exigeante. 
+                    Intimité, service personnalisé et expérience sur mesure.
+                </p>
+            </header>
+            <div class="vip-showcase">
+                <div class="vip-image animate-slide-up">
+                    <img src="VIP1.jpg" alt="Salon VIP 1" class="vip-img">
+                </div>
+                <div class="vip-image animate-slide-up" style="animation-delay: 0.2s;">
+                    <img src="VIP2.jpg" alt="Salon VIP 2" class="vip-img">
+                </div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🍾</div>
+                    <h3>Service Champagne</h3>
+                    <p>Sélection de champagnes et vins d'exception</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎵</div>
+                    <h3>Ambiance Musicale</h3>
+                    <p>DJ privé et playlist personnalisée</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👨‍🍳</div>
+                    <h3>Chef Privé</h3>
+                    <p>Menu dégustation créé spécialement pour vous</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚗</div>
+                    <h3>Service Voiturier</h3>
+                    <p>Parking et service voiturier inclus</p>
+                </div>
+            </div>
+            <div class="cta-box animate-fade-in">
+                <h3>Créez Votre Événement de Rêve</h3>
+                <p>After weddings, anniversaires mémorables, demandes en mariage romantiques... Notre équipe transforme vos souhaits en réalité.</p>
+                <p>✨Contactez-nous pour une expérience sur mesure✨</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Galerie -->
+    <section id="gallery" class="section gallery">
+        <div class="container">
+            <header class="section-header animate-fade-in">
+                <h2 class="section-title glow-gold">Galerie</h2>
+                <div class="separator"></div>
+                <p class="section-description">
+                    Explorez l'élégance et le luxe du Baraka Lounge à travers notre sélection d'images captivantes.
+                </p>
+            </header>
+            <div class="gallery-grid">
+                <div class="gallery-card animate-slide-up" onclick="openCarousel(0)">
+                    <img src="GAL1.jpg" alt="Entrée du Lounge" class="gallery-image">
+                </div>
+                <div class="gallery-card animate-slide-up" style="animation-delay: 0.2s;" onclick="openCarousel(1)">
+                    <img src="GAL2.jpg" alt="Bar Intérieur" class="gallery-image">
+                </div>
+                <div class="gallery-card animate-slide-up" style="animation-delay: 0.4s;" onclick="openCarousel(2)">
+                    <img src="GAL3.jpg" alt="Suite de Luxe" class="gallery-image">
+                </div>
+                <div class="gallery-card view-more animate-slide-up" style="animation-delay: 0.6s;" onclick="openCarousel(0)">
+                    <span>Voir Plus</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carousel Modal -->
+    <div class="carousel-modal" id="carouselModal">
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-item">
+                    <img src="GAL1.jpg" alt="Entrée du Lounge">
+                </div>
+                <div class="carousel-item">
+                    <img src="GAL2.jpg" alt="Bar Intérieur">
+                </div>
+                <div class="carousel-item">
+                    <img src="GAL3.jpg" alt="Suite de Luxe">
+                </div>
+                <div class="carousel-item">
+                    <img src="GAL4.jpg" alt="Galerie 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="GAL5.jpg" alt="Galerie 5">
+                </div>
+                <div class="carousel-item">
+                    <img src="GAL6.jpg" alt="Galerie 6">
+                </div>
+                <div class="carousel-item">
+                    <img src="GAL7.jpg" alt="Galerie 7">
+                </div>
+                <div class="carousel-item">
+                    <img src="GAL8.jpg" alt="Galerie 8">
+                </div>
+                <div class="carousel-item">
+                    <img src="GAL9.jpg" alt="Galerie 9">
+                </div>
+                <div class="carousel-item">
+                    <img src="GAL10.jpg" alt="Galerie 10">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://thumbs.dreamstime.com/b/black-bedroom-gold-mirrors-dark-interior-hotel-room-luxury-design-374902987.jpg" alt="Galerie 11">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.ytimg.com/vi/Pe_KO-djCIA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBJgK8MhHD1Xq8JfLH12VvLDhg3PQ" alt="Galerie 12">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i0.wp.com/360view.ng/wp-content/uploads/2023/10/VIP-Lounge-1-1024x683.jpg?resize=1024%2C683&ssl=1" alt="Galerie 13">
+                </div>
+            </div>
+            <button class="carousel-nav carousel-prev" onclick="moveCarousel(-1)">&#10094;</button>
+            <button class="carousel-nav carousel-next" onclick="moveCarousel(1)">&#10095;</button>
+            <button class="carousel-close" onclick="closeCarousel()">Fermer</button>
+            <div class="carousel-counter" id="carouselCounter">1 / 13</div>
+        </div>
+    </div>
+
+    <!-- Section Reservation -->
+    <section id="reservation" class="section reservation">
+        <div class="container">
+            <header class="section-header animate-fade-in">
+                <h2 class="section-title glow-gold">Réservation</h2>
+                <div class="separator"></div>
+                <p class="section-description">
+                    Réservez votre expérience au Baraka Lounge via WhatsApp en quelques clics.
+                </p>
+            </header>
+            <form id="reservation-form" class="reservation-form animate-slide-up">
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Service</label>
+                    <select id="service" name="service" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="restaurant">Restaurant</option>
+                        <option value="bar">Bar</option>
+                        <option value="chambres">Chambres</option>
+                        <option value="vip">VIP</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Nombre de personnes</label>
+                    <select id="guests" name="guests" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="+10">+10</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Réserver via WhatsApp</button>
+            </form>
+            <div class="info-boxes animate-fade-in">
+                <div class="info-box">
+                    <h3>Horaires</h3>
+                    <p>Ouvert 7J/7</p>
+                    <p>8h - 23h</p>
+                </div>
+                <div class="info-box">
+                    <h3>Contact</h3>
+                    <p><a href="tel:+22607540707">Téléphone / WhatsApp</a></p>
+                    <p><a href="tel:+22607540707">+226 05 11 37 37 </a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>yaBass Lounge</h4>
+                    <p>L'Art de Vivre à l'État Pur</p>
+                    <p>Ouaga 2000<br>Ouagadougou, BurkinaFaso</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+22607540707">+226 05 11 37 37</a></li>
+                        <li><a href="mailto:contact@yaBasslounge.com">contact@yaBasslounge.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Horaires</h4>
+                    <ul class="footer-links">
+                        <li>Restaurant: 8h - 23h</li>
+                        <li>Bar: 18h - 2h</li>
+                        <li>Réception: 24h/24</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Suivez-nous</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://www.facebook.com/p/Ya-Bass-Restaurant-Bar-Lounge-61554610568526/" target="_blank">Facebook</a></li>
+                        <li><a href="https://www.tiktok.com/@lounge.bar.resto" target="_blank">Tiktok</a></li>
+                        <li><a href="https://maps.app.goo.gl/sip3t8WyQaH1yYiX8" target="_blank">Localisation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Baraka Lounge. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navigation Scroll Effect
+            const navbar = document.querySelector('.navbar');
+            const threshold = 50;
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > threshold) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Smooth Scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(anchor.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Mobile Menu Toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+            }
+
+            // Animation on Scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.animate-fade-in, .animate-slide-up').forEach(el => {
+                observer.observe(el);
+            });
+
+            // WhatsApp Reservation Form
+            const form = document.getElementById('reservation-form');
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value;
+                    const dateInput = document.getElementById('date').value;
+                    const service = document.getElementById('service').value;
+                    const guests = document.getElementById('guests').value;
+
+                    // Parse the date
+                    const date = new Date(dateInput);
+                    const day = date.getDate();
+                    const month = date.toLocaleString('fr-FR', { month: 'long' });
+                    const year = date.getFullYear();
+
+                    // Construct the message
+                    const message = `Bonjour je m'appelle ${name} je veux réserver une table au ${service} pour le ${day} ${month} ${year} pour ${guests} personnes est ce possible`;
+                    const whatsappUrl = `https://wa.me/+22605113737?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                });
+            }
+
+            // Carousel Functionality
+            let currentIndex = 0;
+            const track = document.getElementById('carouselTrack');
+            const items = document.querySelectorAll('.carousel-item');
+            const totalItems = items.length;
+            const counter = document.getElementById('carouselCounter');
+
+            window.openCarousel = (index) => {
+                currentIndex = index;
+                updateCarousel();
+                document.getElementById('carouselModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            };
+
+            window.closeCarousel = () => {
+                document.getElementById('carouselModal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            };
+
+            window.moveCarousel = (direction) => {
+                currentIndex = (currentIndex + direction + totalItems) % totalItems;
+                updateCarousel();
+            };
+
+            function updateCarousel() {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                counter.textContent = `${currentIndex + 1} / ${totalItems}`;
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (document.getElementById('carouselModal').classList.contains('active')) {
+                    if (e.key === 'ArrowLeft') {
+                        moveCarousel(-1);
+                    } else if (e.key === 'ArrowRight') {
+                        moveCarousel(1);
+                    } else if (e.key === 'Escape') {
+                        closeCarousel();
+                    }
+                }
+            });
+
+            // Close carousel when clicking outside
+            document.getElementById('carouselModal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('carouselModal')) {
+                    closeCarousel();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
